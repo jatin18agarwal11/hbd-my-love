@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 import { ArrowDown, ArrowRight, ArrowLeft, Heart, Sparkles, Moon, Star, Music2, VolumeX, X, ChevronLeft, ChevronRight, Gamepad2, Film, Utensils, MessageCircle, Gift, Check, Copy, Printer, CalendarDays, Globe2, Clock, Menu, RotateCcw, Mail } from 'lucide-react';
 import { config, photos, featuredPhoto } from './config';
 import MemoryStory from './MemoryStory';
@@ -199,5 +200,5 @@ export default function App() {
     <AnimatePresence>{toast && <motion.div className="toast" role="status" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}><Heart size={18}/>{toast}<button aria-label="Dismiss notification" onClick={() => setToast('')}><X size={15}/></button></motion.div>}</AnimatePresence>
     {confetti > 0 && !reduced && <div className="confetti" key={confetti} aria-hidden="true">{Array.from({ length: 40 }, (_, i) => <i key={i} style={{ left: `${i * 2.5}%`, background: ['#edb4c8', '#cfb9ea', '#f2d29a'][i % 3], animationDelay: `${i % 8 * .12}s`, '--drift': `${i % 2 ? 90 : -90}px` }}/>)}</div>}
     {letter && <Modal onClose={closeLetter} label="What I don’t say enough — a birthday letter for Bubu" className="letter-modal"><BirthdayLetter onClose={closeLetter}/></Modal>}
-  </div></PageContext.Provider>;
+  </div><Analytics route={active} path={`/#/${active}`} /></PageContext.Provider>;
 }
