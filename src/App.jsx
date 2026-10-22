@@ -17,7 +17,7 @@ function Eyebrow({ children }) { return <p className="eyebrow"><span />{children
 function Section({ id, children, className = '' }) {
   const reduced = useReducedMotion(); const page = useContext(PageContext);
   if (page !== id) return null;
-  return <motion.section id={id} className={`chapter page-scene ${className}`} initial={reduced ? false : { opacity: 0, y: 25, filter: 'blur(5px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: .55, ease: [.22, 1, .36, 1] }}>{children}</motion.section>;
+  return <motion.section id={id} className={`chapter page-scene ${className}`} initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .32, ease: [.22, 1, .36, 1] }}>{children}</motion.section>;
 }
 function Photo({ index, ...props }) { const [failed, setFailed] = useState(false); useEffect(() => setFailed(false), [index]); const photo = photos[index]; return photo && !failed ? <img src={photo.src} alt={`Portrait ${index + 1} — ${photo.caption}`} onError={() => setFailed(true)} {...props} /> : <span className="photo-fallback"><Heart /> This little star is unavailable</span>; }
 

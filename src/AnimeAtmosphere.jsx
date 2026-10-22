@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Check, Clover, Compass, Flame, Moon, Sparkles } from 'lucide-react';
-import proposalNight from './proposal-night.png';
+import proposalNight from './proposal-night.webp';
 
 export const animeThemes = [
   { id: 'clover', name: 'Black Clover', mood: 'Grimoire magic', icon: Clover },

@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, Heart, Moon, Sparkles, Star } from 'lucide-react';
 import { featuredPhoto } from './config';
 import { distanceStory } from './distanceStory';
-import playerTwoPhoto from './player-two.png';
+import playerTwoPhoto from './player-two.webp';
 
 // Hand-drawn mainland silhouette. This illustration is not a boundary or navigation map.
 const mainland = 'M211 23 L232 38 255 31 270 51 261 71 276 89 261 102 268 119 287 132 299 158 322 168 342 176 365 176 384 183 399 180 404 165 426 159 443 146 464 143 479 130 493 137 508 153 494 166 483 172 486 192 475 211 473 230 461 234 449 214 439 204 435 184 417 188 410 201 393 197 380 201 366 214 354 230 349 250 334 260 321 273 308 298 294 312 285 330 279 359 271 381 262 396 253 425 250 450 241 478 232 493 224 486 216 462 206 442 199 417 193 393 181 369 172 345 165 324 156 304 150 283 143 270 136 262 120 266 102 255 89 236 102 234 117 240 128 232 118 220 100 220 85 212 78 200 91 196 103 201 119 195 131 181 137 161 150 146 159 124 178 116 185 103 180 88 187 75 177 60 184 46 201 43 Z';

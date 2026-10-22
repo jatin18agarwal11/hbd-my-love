@@ -14,14 +14,22 @@ export function PhotoSlides({ indices = [featuredPhoto.id, 34, 40, 24, 46], labe
     const timer = setInterval(() => { if (!document.hidden) setSlide(n => (n + 1) % indices.length); }, 6000);
     return () => clearInterval(timer);
   }, [playing, reduced, indices.length]);
+  const preloadKey = [indices[slide], indices[(slide + 1) % indices.length], indices[(slide - 1 + indices.length) % indices.length]].join(',');
+  useEffect(() => {
+    const adjacent = [indices[(slide + 1) % indices.length], indices[(slide - 1 + indices.length) % indices.length]];
+    adjacent.forEach(index => {
+      const src = photos[index]?.src;
+      if (src) { const image = new Image(); image.decoding = 'async'; image.src = src; }
+    });
+  }, [preloadKey]);
   const next = delta => setSlide(n => (n + delta + indices.length) % indices.length);
   const photo = photos[indices[slide]];
   return <div className={`photo-slides ${compact ? 'compact' : ''} ${birthday ? 'birthday-carousel' : ''}`} role="region" aria-roledescription="carousel" aria-label={label} onKeyDown={e => { if (e.key === 'ArrowRight') { e.preventDefault(); next(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); next(-1); } }}>
     {birthday && <p className="birthday-carousel-heading">23 OCTOBER · YOUR LITTLE BIRTHDAY ALBUM</p>}<span className="photo-doodle doodle-top">{birthday ? 'every little wish is for you.' : 'I wish I were next to you.'}</span>
     <div className="slide-stack" onTouchStart={e => { touch.current = e.touches[0].clientX; }} onTouchEnd={e => { if (touch.current !== null) { const distance = touch.current - e.changedTouches[0].clientX; if (Math.abs(distance) > 45) next(distance > 0 ? 1 : -1); touch.current = null; } }}>
       <div className="photo-sparkles" aria-hidden="true"><span>✧</span><span>✦</span><span>✧</span></div><div className="stack-paper paper-one"/><div className="stack-paper paper-two"/>
-      <AnimatePresence initial={false} mode="popLayout"><motion.figure key={slide} className="slide-photo" role="group" aria-roledescription="slide" aria-label={`${slide + 1} of ${indices.length}`} whileHover={reduced ? undefined : { rotate: 0, y: -4 }} initial={reduced ? false : { opacity: 0, x: 55, rotate: 7, scale: .94 }} animate={{ opacity: 1, x: 0, rotate: -3, scale: 1 }} exit={reduced ? {} : { opacity: 0, x: -55, rotate: -9, scale: .96 }} transition={{ type: 'spring', stiffness: 125, damping: 21 }}>
-        <div className="slide-image" style={{ '--slide-photo': photo?.src ? `url("${photo.src}")` : 'none' }}><span className="slide-unavailable">A portrait of my favorite person</span><img src={photo?.src} alt={`Bubu — ${photo?.caption}`} loading={compact ? 'lazy' : 'eager'} onError={e => { e.currentTarget.style.visibility = 'hidden'; }} /></div>
+      <AnimatePresence initial={false} mode="popLayout"><motion.figure key={slide} className="slide-photo" role="group" aria-roledescription="slide" aria-label={`${slide + 1} of ${indices.length}`} whileHover={reduced ? undefined : { rotate: 0, y: -4 }} initial={reduced ? false : { opacity: 0, x: 24, rotate: 3, scale: .985 }} animate={{ opacity: 1, x: 0, rotate: -3, scale: 1 }} exit={reduced ? {} : { opacity: 0, x: -24, rotate: -4, scale: .99 }} transition={{ type: 'spring', stiffness: 220, damping: 26, mass: .65 }}>
+        <div className="slide-image" style={{ '--slide-photo': photo?.src ? `url("${photo.src}")` : 'none' }}><span className="slide-unavailable">A portrait of my favorite person</span><img src={photo?.src} alt={`Bubu — ${photo?.caption}`} loading="eager" decoding="async" fetchPriority="high" onError={e => { e.currentTarget.style.visibility = 'hidden'; }} /></div>
         <figcaption>{photo?.caption}<span>♡</span></figcaption><span className="photo-tape"/>
       </motion.figure></AnimatePresence>
       <motion.span className="sticker-heart" aria-hidden="true" animate={reduced ? {} : { rotate: [10, 18, 10], y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity }}>♡</motion.span>

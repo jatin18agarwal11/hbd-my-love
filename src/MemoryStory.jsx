@@ -22,7 +22,7 @@ function Frames({ photos, onOpen, className = '' }) {
       whileHover={reduced ? undefined : { y: -5, rotate: index % 2 ? 1.5 : -1.5, scale: 1.015 }}
       transition={{ duration: reduced ? 0 : .55, delay: reduced ? 0 : (index % 6) * .035 }}
     >
-      <div className="photo-wrap"><span className="memory-missing"><Heart size={21}/> a little photo of you</span><img src={photo.src} alt={`Bubu — ${photo.caption}`} loading="lazy" onError={event => { event.currentTarget.hidden = true; }}/><span className="photo-open"><Heart size={18}/></span></div>
+      <div className="photo-wrap" style={{ '--memory-photo': `url("${photo.src}")` }}><span className="memory-missing" hidden><Heart size={21}/> a little photo of you</span><img src={photo.src} alt={`Bubu — ${photo.caption}`} loading="lazy" decoding="async" onError={event => { event.currentTarget.hidden = true; event.currentTarget.previousElementSibling.hidden = false; }}/><span className="photo-open"><Heart size={18}/></span></div>
       <span className="photo-caption"><span>{photo.caption}</span><small>{String(photo.id + 1).padStart(2, '0')}</small></span>
       <span className="memory-tape" aria-hidden="true"/>
     </motion.button>)}
