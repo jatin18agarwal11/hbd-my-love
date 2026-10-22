@@ -14,10 +14,10 @@ export function PhotoSlides({ indices = [featuredPhoto.id, 34, 40, 24, 46], labe
     const timer = setInterval(() => { if (!document.hidden) setSlide(n => (n + 1) % indices.length); }, 6000);
     return () => clearInterval(timer);
   }, [playing, reduced, indices.length]);
-  const preloadKey = [indices[slide], indices[(slide + 1) % indices.length], indices[(slide - 1 + indices.length) % indices.length]].join(',');
+  const preloadKey = [indices[slide], indices[(slide + 1) % indices.length], indices[(slide + 2) % indices.length], indices[(slide - 1 + indices.length) % indices.length], indices[(slide - 2 + indices.length) % indices.length]].join(',');
   useEffect(() => {
-    const adjacent = [indices[(slide + 1) % indices.length], indices[(slide - 1 + indices.length) % indices.length]];
-    adjacent.forEach(index => {
+    const nearby = [...new Set([indices[(slide + 1) % indices.length], indices[(slide + 2) % indices.length], indices[(slide - 1 + indices.length) % indices.length], indices[(slide - 2 + indices.length) % indices.length]])];
+    nearby.forEach(index => {
       const src = photos[index]?.src;
       if (src) { const image = new Image(); image.decoding = 'async'; image.src = src; }
     });

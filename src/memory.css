@@ -37,6 +37,7 @@
 .active-universe .memory-thread{display:flex;align-items:center;justify-content:center;gap:14px;margin:35px auto 38px;color:#edb5c6}
 .active-universe .memory-thread span{width:min(24vw,180px);height:1px;background:linear-gradient(90deg,transparent,rgba(236,177,195,.55))}.active-universe .memory-thread span:last-child{transform:rotate(180deg)}
 .active-universe .memory-story-signoff{display:flex;align-items:center;justify-content:center;gap:10px;margin:38px 0 0;color:#efc0ce;font:italic 15px Georgia,serif}.active-universe .memory-story-signoff svg:last-child{fill:#efc0ce}
+.active-universe .memory-load-progress{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px;margin:30px auto 0;color:#d6c3cc;font-size:12px}.active-universe .memory-load-progress .button{min-height:43px;padding:10px 16px;font-size:12px}
 .active-universe .all-memory-frames{grid-template-columns:repeat(5,minmax(0,1fr));gap:19px}
 .active-universe .all-memory-frames .memory-frame{grid-column:auto;grid-row:auto;padding:7px 7px 0}
 .active-universe .all-memory-frames .memory-frame .photo-wrap{aspect-ratio:4/5}
