@@ -2,11 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { chapters, nextChapter, previousChapter, parseChapter } from './navigation.js';
 
-test('page 7 proceeds to page 8, never back to the welcome page', () => {
+test('proposal and date chapters proceed directly to the final message', () => {
   assert.equal(chapters[6][0], 'proposal');
   assert.equal(nextChapter('proposal'), 'coop');
   assert.equal(nextChapter('coop'), 'date');
-  assert.equal(nextChapter('date'), 'calendar');
+  assert.equal(nextChapter('date'), 'final');
+  assert.equal(parseChapter('#/calendar'), null);
 });
 test('every chapter moves forward exactly once; the last page does not wrap', () => {
   const visited = []; let current = chapters[0][0];

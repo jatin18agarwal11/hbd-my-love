@@ -4,7 +4,7 @@ export const chapters = [
   ['birthday', 'Your birthday'], ['character', 'How I see you'],
   ['universe', 'Pictures of you'], ['quest', 'What I want to say'],
   ['proposal', 'One little question'], ['coop', 'Still on your team'],
-  ['date', 'A little time with you'], ['calendar', 'When are you free?'],
+  ['date', 'A little time with you'],
   ['final', 'One last thing']
 ];
 export function parseChapter(hash) {
