@@ -1,0 +1,6 @@
+/* Keep every carousel photo fully visible despite differing source proportions. */
+.slide-image{isolation:isolate;background:#302631}
+.slide-image:before{position:absolute;z-index:-1;inset:-14px;content:"";background-image:linear-gradient(rgba(22,17,27,.24),rgba(22,17,27,.38)),var(--slide-photo);background-position:center;background-size:cover;filter:blur(14px);transform:scale(1.06);opacity:.9}
+.slide-image img{z-index:1;object-fit:contain!important;object-position:center!important;transform:none!important;background:transparent}
+.slide-photo:hover .slide-image img,.personal-proposal .slide-photo:hover .slide-image img{transform:none!important}
+@media(prefers-reduced-motion:reduce){.slide-image:before,.slide-image img{transition:none!important}}

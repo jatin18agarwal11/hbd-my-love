@@ -7,4 +7,5 @@ import './distance.css';
 import './mobile.css';
 import './anime.css';
 import './memory.css';
+import './photo-fit.css';
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);
