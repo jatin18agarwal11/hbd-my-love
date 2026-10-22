@@ -1,6 +1,6 @@
 // One ordered route list shared by the menu, page counter, and next/back controls.
 export const chapters = [
-  ['distance', 'From me to you'], ['welcome', 'Hey, Bubu'],
+  ['welcome', 'Hey, Bubu'], ['distance', 'From me to you'],
   ['birthday', 'Your birthday'], ['character', 'How I see you'],
   ['universe', 'Pictures of you'], ['quest', 'What I want to say'],
   ['proposal', 'One little question'], ['coop', 'Still on your team'],
@@ -19,7 +19,7 @@ export function previousChapter(id) {
   const index = chapters.findIndex(([value]) => value === id);
   return index > 0 ? chapters[index - 1][0] : null;
 }
-export function readPage() { return parseChapter(window.location.hash) || 'distance'; }
+export function readPage() { return parseChapter(window.location.hash) || 'welcome'; }
 export function subscribePage(listener) {
   window.addEventListener('hashchange', listener);
   return () => window.removeEventListener('hashchange', listener);
