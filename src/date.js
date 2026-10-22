@@ -20,11 +20,11 @@ export function resolveInstants(date, time, zone) {
   return [...offsets].map(o => target - o).filter(ms => { const p = parts(ms); return `${p.year}-${p.month}-${p.day}` === date && `${p.hour}:${p.minute}` === time; }).sort();
 }
 export function validateInvitation({ date, time, zone, activities }, now = Date.now()) {
-  if (!date || !time || !zone || !activities.length) return 'Choose a date, a time, your timezone, and at least one activity.';
+  if (!date || !time || !zone || !activities.length) return 'Choose a date, a time, and at least one activity.';
   let matches;
   try { matches = resolveInstants(date, time, zone); } catch { return 'Please choose a valid timezone.'; }
   if (!matches.length) return 'That time does not exist because the clocks change. Please choose another time.';
-  if (matches.length > 1) return 'The clocks repeat that hour in your timezone. Please choose a time outside the repeated hour.';
-  if (matches[0] <= now) return 'Choose a date and time that are still in the future in your timezone.';
+  if (matches.length > 1) return 'The clocks repeat that hour in IST. Please choose a time outside the repeated hour.';
+  if (matches[0] <= now) return 'Choose a date and time that are still in the future in IST.';
   return '';
 }
