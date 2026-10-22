@@ -31,12 +31,12 @@ test('DST skipped and repeated hours cannot silently schedule the wrong instant'
   assert.equal(resolveInstants('2026-11-01', '01:30', 'America/New_York').length, 2);
   assert.match(validateInvitation({ date:'2026-11-01', time:'01:30', zone:'America/New_York', activities:['Anime night'] }, 0), /repeat/);
 });
-test('invitation requires all selections and a future instant', () => {
+test('invitation requires date, time, IST, and a future instant; activities stay optional', () => {
   const now = Date.parse('2026-10-21T17:00:00Z');
   const valid = { date:'2026-10-23', time:'20:00', zone:'Asia/Kolkata', activities:['Anime night'] };
   assert.equal(validateInvitation(valid, now), '');
   for (const field of ['date', 'time', 'zone']) assert.ok(validateInvitation({ ...valid, [field]: '' }, now));
-  assert.ok(validateInvitation({ ...valid, activities: [] }, now));
+  assert.equal(validateInvitation({ ...valid, activities: [] }, now), '');
   assert.match(validateInvitation({ ...valid, zone: 'invalid' }, now), /valid timezone/);
   assert.match(validateInvitation({ ...valid, date: '2026-10-20' }, now), /future/);
   assert.match(validateInvitation({ ...valid, date:'2026-10-21', time:'20:00' }, now), /future/);

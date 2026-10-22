@@ -20,7 +20,7 @@ export function resolveInstants(date, time, zone) {
   return [...offsets].map(o => target - o).filter(ms => { const p = parts(ms); return `${p.year}-${p.month}-${p.day}` === date && `${p.hour}:${p.minute}` === time; }).sort();
 }
 export function validateInvitation({ date, time, zone, activities }, now = Date.now()) {
-  if (!date || !time || !zone || !activities.length) return 'Choose a date, a time, and at least one activity.';
+  if (!date || !time || !zone) return 'Choose a date, a time, and confirm IST.';
   let matches;
   try { matches = resolveInstants(date, time, zone); } catch { return 'Please choose a valid timezone.'; }
   if (!matches.length) return 'That time does not exist because the clocks change. Please choose another time.';
